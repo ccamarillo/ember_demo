@@ -1,0 +1,11 @@
+@import url(http://fonts.googleapis.com/css?family=Merriweather);
+
+@mixin mw { 
+  font-family: 'Merriweather', serif;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+@mixin raleway { 
+  font-family: 'Raleway', sans-serif;
+}

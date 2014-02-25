@@ -1,0 +1,19 @@
+<h2>Clients{{#link-to 'clients.create' classNames="btn btn-link"}}<span class="glyphicon glyphicon-plus"></span>{{/link-to}}</h2>
+
+{{outlet}}
+
+{{#if model}}
+  {{#each model}}
+    <h3>{{this.name}} <a href="" class="btn btn-link btn-xs"><span class="glyphicon glyphicon-edit"></span></a></h3>
+    <ul class="list-unstyled">
+      {{#each project in projects}}
+        <li>
+          {{#link-to 'project' project}}{{{project.name}}}{{/link-to}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/each}}
+{{else}}
+  There are no clients to display.  Add a client.
+{{/if}}
+
