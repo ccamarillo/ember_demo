@@ -1,0 +1,9 @@
+{{#if showConfirm}}
+  <div>
+    Are you sure?
+    <button type="button" class="btn btn-danger btn-xs" {{action "doConfirm"}}>{{label}}</button> 
+    <button type="button" class="btn btn-link btn-xs" {{action "cancel"}}>Cancel</button>
+  </div>
+{{else}}
+  <button type="button" class="btn btn-xs btn-warning" {{action "confirm"}}>{{label}}</button>
+{{/if}}

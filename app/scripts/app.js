@@ -5,6 +5,7 @@ var Ember2 = window.Ember2 = Ember.Application.create({
 /* Order and include as you please. */
 require('scripts/vendor/*');
 require('scripts/controllers/*');
+require('scripts/components/*');
 require('scripts/store');
 require('scripts/models/*');
 require('scripts/routes/*');

@@ -1,3 +1,10 @@
-{{view Ember.ContenteditableView tag="h1" valueBinding="model.name" plaintext="false"}}
-{{view Ember.ContenteditableView tag="div" valueBinding="model.description"}}
+<div class="row">
+  <div class="col-md-8">
+    {{view Ember.ContenteditableView myTagName="h1" valueBinding="model.name" label="name" required=true}}
+    {{view Ember.ContenteditableView myTagName="div" valueBinding="model.description" label="description"}}
+  </div>
+  <div class="col-md-4">
+    {{confirm-button label="Delete this Project" classNames="pull-right" action="delete" model=model}}
+  </div>
+</div>
 

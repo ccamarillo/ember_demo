@@ -1,15 +1,21 @@
 Ember.ContenteditableView = Ember.View.extend({
-  tagName: function() { return this.get('tag') },
-  attributeBindings: ['contenteditable'],
+  
+  templateName: 'utils/ember-contenteditable',
+  myTagName: function() { return this.get('myTagName') },
+  classNames: ['ember-content-editable'],
 
+  // Elements
+  inputElement: null,
+  revertButton: null,
+  
   // Variables:
-
   editable: true,
   isUserTyping: false,
   userHasChanged: false,
   plaintext: false,
-  revertButton: null,
   initialContent: null,
+  empty: false,
+  required: false,
 
   // Properties:
   contenteditable: (function() {
@@ -26,11 +32,24 @@ Ember.ContenteditableView = Ember.View.extend({
   }).observes('value'),
 
   // Events:
-
   didInsertElement: function() {
     this.set('initialContent', this.get('value'));
-    return this.setContent();
+    inputElement = $('<' + this.myTagName + ' contenteditable="true">' + this.get('value') + '</' + this.myTagName + '>').appendTo($(this.get('element')));
+    this.set('inputElement', inputElement);
+
+    this.set('revertButton', $(this.get('element')).find('.revert-button'));
+    this.get('revertButton').tooltip();
+    
+    var self = this;
+    this.get('revertButton').click(function() { 
+      self.revertContent();
+    });
+
+    this.setContent();
+    
+    return true;
   },
+  
 
   focusOut: function() {
     return this.set('isUserTyping', false);
@@ -45,38 +64,50 @@ Ember.ContenteditableView = Ember.View.extend({
   keyUp: function(event) {
     if (!this.userHasChanged) { 
       this.set('userHasChanged', true);
-      this.addRevertButton(event);
-    }
+      this.get('revertButton').show();
+    } 
 
-    if (this.$().html() == this.get('initialContent') || this.$().text() == this.get('initialContent')) { 
+    if (this.get('inputElement').html() == this.get('initialContent') || this.get('inputElement').text() == this.get('initialContent')) { 
       this.revertContent();
     }
 
-    if (this.get('plaintext')) {
-      return this.set('value', this.$().text());
-    } else {
-      return this.set('value', this.$().html());
+    if (this.get('inputElement').text().length > 0) {
+      this.removeEmpty();
+      return this.set('value', this.get('inputElement').text());
+    } else if (this.get('inputElement').html().length > 0) { 
+      this.removeEmpty();
+      return this.set('value', this.get('inputElement').html()); 
+    } else { 
+      this.addEmpty(event);
     }
   },
 
-  addRevertButton: function(event) { 
-    this.set('revertButton', $('<a class="pull-right btn btn-link muted btn-sm" data-toggle="tooltip" data-placement="top" title="Revert Changes" style="margin-top: 3px; margin-right: 2px;"><span class="glyphicon glyphicon-floppy-remove text-muted"></span></a>').insertBefore(event.target));
-    this.get('revertButton').tooltip();
-    var self = this;
-    return this.get('revertButton').click(function() { 
-      self.revertContent();
-    });
+  addEmpty: function(event) { 
+    $(this.get('element')).addClass('empty');
+    if (this.required) { 
+      $(this.get('element')).addClass('required');
+    }
   },
+
+  removeEmpty: function() { 
+    $(this.get('element')).removeClass('empty');
+  },
+
 
   revertContent: function() { 
     this.set('value', this.get('initialContent'));
     this.setContent();
     this.set('userHasChanged', false);
-    this.get('revertButton').tooltip('destroy')
-    return this.get('revertButton').remove();
-  },
+    this.removeEmpty();
 
+    return this.get('revertButton').hide();
+    
+  },
+  
   setContent: function() {
-    return this.$().html(this.get('value'));
+    //return this.$().html(this.get('value'));
+    return this.get('inputElement').html(this.get('value'));
   }
+  
+  
 });

@@ -27,9 +27,7 @@ Ember2.Client.FIXTURES = [
   
   {
     id: 1,
-    
     name: 'Urban Airship',
-    
   }
   
 ];

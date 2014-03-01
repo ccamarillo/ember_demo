@@ -1,0 +1,59 @@
+.ember-content-editable { 
+
+  position: relative;
+  
+  [contenteditable=true] { 
+    border-width: 1px;
+    border-style: dashed; 
+    border-color: transparent;
+    padding: 5px;
+    
+    &:hover { 
+      border-color: #ddd;
+    }
+    &:focus { 
+      background-color: #f5fafe;
+      border-color: transparent;
+      outline: 0px;
+      -webkit-box-shadow: inset 1px 1px 5px 0px rgba(222,222,222,1);
+      -moz-box-shadow: inset 1px 1px 5px 0px rgba(222,222,222,1);
+      box-shadow: inset 1px 1px 5px 0px rgba(222,222,222,1);
+    }
+  }
+
+  &.empty { 
+
+    [contenteditable=true] { 
+      border-color: #ddd;
+    }
+
+    label { 
+      display: block;
+    }
+
+  }
+
+  &.required { 
+    label { 
+      @extend .text-danger;
+      &:after { 
+        content: ' (required)';
+      }
+    }
+  }
+
+  label { 
+    display: none;
+    position: absolute;
+    padding-top: 7px;
+    font-style: italic;
+    color: #bbb;
+    padding-left: 10px;
+    font-weight: normal;
+  } 
+
+  .revert-button { 
+    display: none;
+  }
+
+}

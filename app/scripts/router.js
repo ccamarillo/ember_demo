@@ -8,11 +8,10 @@ Ember2.Router.map(function () {
   });
 
   this.resource('projects', function(){
-    this.resource('project', { path: '/:project_id' }, function(){
-      this.route('edit');
-    });
     this.route('create');
   });
+
+  this.route('project', { path: 'project/:project_id' });
   
   this.resource('users', function(){
     this.resource('user', { path: '/:user_id' }, function(){

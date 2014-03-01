@@ -2,7 +2,7 @@ Ember2.UserEditController = Ember.ObjectController.extend({
   needs: 'user',
   actions: {
     save: function(){
-      self = this
+      self = this;
       this.get('buffer').forEach(function(attr){
         self.get('controllers.user.model').set(attr.key, attr.value);
       });

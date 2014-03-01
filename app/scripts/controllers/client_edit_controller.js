@@ -2,7 +2,7 @@ Ember2.ClientEditController = Ember.ObjectController.extend({
   needs: 'client',
   actions: {
     save: function(){
-      self = this
+      self = this;
       this.get('buffer').forEach(function(attr){
         self.get('controllers.client.model').set(attr.key, attr.value);
       });

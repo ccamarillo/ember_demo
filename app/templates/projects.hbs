@@ -1,1 +1,16 @@
+{{#if model}}
+  {{#each model}}
+    <h3>{{this.name}} {{#link-to 'project' this classNames="btn-btn-link btn-xs"}}<span class="glyphicon glyphicon-edit"></span>{{/link-to}}</h3>
+    <ul class="list-unstyled">
+      {{#each project in projects}}
+        <li>
+          {{#link-to 'project' project}}{{{project.name}}}{{/link-to}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/each}}
+{{else}}
+  There are no projects to display.  Add a project.
+{{/if}}
+
 {{outlet}}
