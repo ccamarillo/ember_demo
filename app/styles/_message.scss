@@ -1,0 +1,23 @@
+#notifications { 
+  position: absolute;
+  top: -50px;
+  width: 100%;
+  z-index: 9999;
+  @extend .alert;
+  border-radius: 0px;
+  opacity: .95;
+
+  transition: top .5s ease;
+
+  &.success { 
+    @extend .alert-success;
+  }
+
+  &.error { 
+    @extend .alert-danger;
+  }
+
+  &.visible { 
+    top: 0px;
+  }
+}
