@@ -4,6 +4,7 @@ $icon-font-path: "../styles/fonts/"; // Change the path to the fonts
 @import 'nav';
 @import 'ember-contenteditable';
 @import 'message';
+@import 'forms';
 
 /* Put your CSS here */
 html, body {
@@ -15,4 +16,6 @@ h1, h2, h3, h4 {
   @include mw();
 }
 
-
+.ember-view { 
+  outline: 0;
+}

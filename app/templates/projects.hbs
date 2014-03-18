@@ -1,3 +1,20 @@
+<div class="row">
+  <div class="col-md-8">
+    <h1>
+      Projects
+    </h1>
+  </div>
+  <div class="col-md-4 button-container">
+    {{#link-to 'projects.create' animations="main:slideLeft" classNames="btn btn-success"}}add{{/link-to}}
+  </div> 
+</div>
+
+{{#unless model}}
+  <p>There are no projects to display.  {{#link-to 'projects.create'}}Add a project.{{/link-to}}</p>
+{{/unless}}
+
+{{outlet}}
+
 {{#if model}}
   {{#each model}}
     <h3>{{this.name}} {{#link-to 'project' this classNames="btn-btn-link btn-xs"}}<span class="glyphicon glyphicon-edit"></span>{{/link-to}}</h3>
@@ -9,8 +26,5 @@
       {{/each}}
     </ul>
   {{/each}}
-{{else}}
-  There are no projects to display.  Add a project.
 {{/if}}
 
-{{outlet}}

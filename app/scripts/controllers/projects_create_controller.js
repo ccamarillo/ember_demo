@@ -1,12 +1,17 @@
 Ember2.ProjectsCreateController = Ember.ObjectController.extend({
-  needs: 'projects',
-  actions: {
-    save: function(){
-      self = this;
-      this.get('buffer').forEach(function(attr){
-        self.get('controllers.project.model').set(attr.key, attr.value);
-      });
-      this.transitionToRoute('project',this.get('model'));
+  name: '',
+  description: '',
+  actions: { 
+    save: function() {
+      if (this.get('name') !== '') { 
+        var store = this.store;
+        var project = store.createRecord('project', { 
+          name: this.get('name'),
+          description: this.get('description')
+        });
+        project.save();
+        this.transitionToRoute('projects');
+      }
     }
   }
 });
