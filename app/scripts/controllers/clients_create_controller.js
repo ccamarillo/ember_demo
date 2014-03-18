@@ -6,6 +6,7 @@ Ember2.ClientsCreateController = Ember.ObjectController.extend({
         var client = store.createRecord('client', { 
           name: this.get('name')
         });
+        client.save();
         this.transitionToRoute('clients');
       }
     }
